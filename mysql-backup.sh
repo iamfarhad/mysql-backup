@@ -14,12 +14,10 @@ NOW=$(date +"%Y%m%d_%H%M")
 
 ### See comments below ###
 ### [ ! -d $BAK ] && mkdir -p $BAK || /bin/rm -f $BAK/* ###
+### Create directory if not exists ###
 [ ! -d "$BAK" ] && mkdir -p "$BAK"
 [ ! -d "$BAK_MONGO" ] && mkdir -p "$BAK_MONGO"
 
-#DBS="$($MYSQL -u $MUSER -h $MHOST -p$MPASS -Bse 'show databases')"
-#for db in $DBS
-#do
 FILE=$BAK/db_backup_final_$NOW.gz
 
 mysqldump -u $MUSER --verbose --quick --single-transaction --password=$MPASS $MDB | $GZIP -9 > $FILE
